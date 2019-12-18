@@ -30,7 +30,7 @@ void dijkstra(int vs)
 		dis[i]=g[vs][i];
 		flag[i]=0;
 	}
-    flag[vs]=1;
+        flag[vs]=1;
 	dis[vs]=0;
 	//遍历num-1次，每次找出一个顶点的最短路径
 	for(i=1;i<num;i++)
