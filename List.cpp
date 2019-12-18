@@ -100,12 +100,12 @@ void Union(SeqStudentListByArray *list1, SeqStudentListByArray *list2)
 }
 int main()
 {
-	int i;
-	InitializeList();
-	struct Student s1={"a","123",95};
-	struct Student s2={"b","124",96};
-	struct Student s3={"c","125",97};
-	struct Student s4,s5;
+    int i;
+    InitializeList();
+    struct Student s1={"a","123",95};
+    struct Student s2={"b","124",96};
+    struct Student s3={"c","125",97};
+    struct Student s4,s5;
     insert(s1,1);
     insert(s2,2);
     insert(s3,3);
@@ -124,3 +124,8 @@ int main()
     printf("\n");
     return 0;
 }
+//output:
+//95 96 97
+//96 97
+//96
+//97
