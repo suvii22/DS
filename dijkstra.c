@@ -3,7 +3,6 @@
 #define INF 65535
 int g[101][101];
 int num;
-/************Dijkstra****************/
 void Initialize()
 {
 	int i,j;
@@ -69,8 +68,7 @@ void dijkstra(int vs)
 }
 int main()
 {
-	/************Dijkstra****************/
-	scanf("%d",&num);
+    scanf("%d",&num);
     Initialize();
     InsertEdge(1,2,10);
     InsertEdge(1,3,8);
