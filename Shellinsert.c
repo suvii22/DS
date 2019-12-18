@@ -9,11 +9,11 @@ void ShellInsert(int arr[],int len)
 {
    int i,j,gap;
    for(gap=len/2;gap>0;gap/=2)
-   	   for(i=gap;i<len;i++)
-   		   for(j=i-gap;j>=0&&arr[j]>arr[j+gap];j-=gap)
-   		   {
-                       Swap(&arr[j],&arr[j+gap]);
-   		   }
+       for(i=gap;i<len;i++)
+           for(j=i-gap;j>=0&&arr[j]>arr[j+gap];j-=gap)
+   	   {
+               Swap(&arr[j],&arr[j+gap]);
+           }
 
 
 }
