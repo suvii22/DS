@@ -46,7 +46,7 @@ bool insert(const char* name, const char* id, int score)
 		return false;
 	}
 }
-bool get(int index, struct StudentNode& value) //index从1开始
+bool get(int index, struct StudentNode& value) //index麓脫1驴陋脢录
 {
 	if (index > g_studentListMgr.count - 1 || g_studentListMgr.count == 0) {
 		return false;
@@ -75,7 +75,7 @@ bool locate(const char* name, struct StudentNode& value)
 	}
 	return false;
 }
-bool remove(int index) //index从1开始 
+bool remove(int index) //index麓脫1驴陋脢录 
 {
 struct  StudentNode *tmpNode, *tmpPreNode;
 if (index > g_studentListMgr.count - 1 || g_studentListMgr.count == 0) {
@@ -133,8 +133,4 @@ void Union(SeqStudentList* list1, SeqStudentList* list2)
 			list1->head = tmpPtr;
 		}
 	}
-}
-int main()
-{
-	return 0;
 }
