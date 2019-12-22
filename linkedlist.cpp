@@ -46,7 +46,7 @@ bool insert(const char* name, const char* id, int score)
 		return false;
 	}
 }
-bool get(int index, struct StudentNode& value) //index´Ó1¿ªÊ¼
+bool get(int index, struct StudentNode& value) //index从1开始
 {
 	if (index > g_studentListMgr.count - 1 || g_studentListMgr.count == 0) {
 		return false;
@@ -75,7 +75,7 @@ bool locate(const char* name, struct StudentNode& value)
 	}
 	return false;
 }
-bool remove(int index) //index´Ó1¿ªÊ¼ 
+bool remove(int index) //index从1开始
 {
 struct  StudentNode *tmpNode, *tmpPreNode;
 if (index > g_studentListMgr.count - 1 || g_studentListMgr.count == 0) {
