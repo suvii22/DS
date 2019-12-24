@@ -10,12 +10,12 @@ typedef struct {
     int n,m,num;
 }TSMatrix;
 TSMatrix fastTransposeMatrix(TSMatrix M,TSMatrix T){
-    //µÚ1²½£ºĞĞºÍÁĞÖÃ»»
+    //ç¬¬1æ­¥ï¼šè¡Œå’Œåˆ—ç½®æ¢
     T.m=M.n;
     T.n=M.m;
     T.num=M.num;
     if (T.num) {
-        //¼ÆËãarrayÊı×é
+        //è®¡ç®—arrayæ•°ç»„
         int array[number];
         for (int col=0; col<M.m; col++) {
             array[col]=0;
@@ -24,29 +24,29 @@ TSMatrix fastTransposeMatrix(TSMatrix M,TSMatrix T){
             int j=M.data[t].j;
             array[j]++;
         }
-        //´´½¨²¢³õÊ¼»¯cpotÊı×é
+        //åˆ›å»ºå¹¶åˆå§‹åŒ–cpotæ•°ç»„
         int cpot[T.m];
-        cpot[0]=1;//µÚÒ»ÁĞÖĞµÚÒ»¸ö·Ç0ÔªËØµÄÎ»ÖÃÄ¬ÈÏÎª1
+        cpot[0]=1;//ç¬¬ä¸€åˆ—ä¸­ç¬¬ä¸€ä¸ªé0å…ƒç´ çš„ä½ç½®é»˜è®¤ä¸º1
         for (int col=1; col<M.m; col++) {
             cpot[col]=cpot[col-1]+array[col-1];
         }
-        //±éÀúÒ»´Î¼´¿ÉÊµÏÖÈıÔª×é±íµÄ×ªÖÃ
+        //éå†ä¸€æ¬¡å³å¯å®ç°ä¸‰å…ƒç»„è¡¨çš„è½¬ç½®
         for (int p=0; p<M.num; p++) {
-            //ÌáÈ¡µ±Ç°ÈıÔª×éµÄÁĞÊı
+            //æå–å½“å‰ä¸‰å…ƒç»„çš„åˆ—æ•°
             int col=M.data[p].j;
-            //¸ù¾İÁĞÊıºÍcpotÊı×é£¬ÕÒµ½µ±Ç°ÔªËØĞèÒª´æ·ÅµÄÎ»ÖÃ
+            //æ ¹æ®åˆ—æ•°å’Œcpotæ•°ç»„ï¼Œæ‰¾åˆ°å½“å‰å…ƒç´ éœ€è¦å­˜æ”¾çš„ä½ç½®
             int q=cpot[col];
-            //×ªÖÃ¾ØÕóµÄÈıÔª×éÄ¬ÈÏ´ÓÊı×éÏÂ±ê0¿ªÊ¼£¬¶øµÃµ½µÄqÖµÊÇµ¥´¿µÄÎ»ÖÃ£¬ËùÒÔÒª¼õ1
+            //è½¬ç½®çŸ©é˜µçš„ä¸‰å…ƒç»„é»˜è®¤ä»æ•°ç»„ä¸‹æ ‡0å¼€å§‹ï¼Œè€Œå¾—åˆ°çš„qå€¼æ˜¯å•çº¯çš„ä½ç½®ï¼Œæ‰€ä»¥è¦å‡1
             T.data[q-1].i=M.data[p].j;
             T.data[q-1].j=M.data[p].i;
             T.data[q-1].data=M.data[p].data;
-            //´æ·ÅÍê³Éºó£¬cpotÊı×é¶ÔÓ¦µÄÎ»ÖÃÒª+1£¬ÒÔ±ãÏÂ´Î¸ÃÁĞ´æ´¢ÏÂÒ»¸öÈıÔª×é
+            //å­˜æ”¾å®Œæˆåï¼Œcpotæ•°ç»„å¯¹åº”çš„ä½ç½®è¦+1ï¼Œä»¥ä¾¿ä¸‹æ¬¡è¯¥åˆ—å­˜å‚¨ä¸‹ä¸€ä¸ªä¸‰å…ƒç»„
             cpot[col]++;
         }
     }
     return T;
 }
-//fastTransposeMatrix·ÅÖÃÎ»ÖÃ
+//fastTransposeMatrixæ”¾ç½®ä½ç½®
 int main() {
     TSMatrix M;
     M.m=2;
@@ -67,24 +67,9 @@ int main() {
   
     TSMatrix T;
     T=fastTransposeMatrix(M, T);
-    printf("×ªÖÃ¾ØÕóÈıÔª×é±íÎª£º\n");
+    printf("è½¬ç½®çŸ©é˜µä¸‰å…ƒç»„è¡¨ä¸ºï¼š\n");
     for (int i=0; i<T.num; i++) {
         printf("(%d,%d,%d)\n",T.data[i].i,T.data[i].j,T.data[i].data);
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
