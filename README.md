@@ -29,7 +29,7 @@ __优化__：当p[j] != s[i] 时，下次匹配必然是p[ next[j] ] 跟s[i]匹�
 num记录矩阵转置前各列，即转置矩阵各行非零元素个数；  
 cpot记录各行非零元素在转置三元组表中开始存放位置。   
 __cpot[0]=1__  
-__cpot[col]=cpot[col-1]+num[col-1]__   2≦col≦M.colSize  
+__cpot[col]=cpot[col-1]+num[col-1]__   0<col<M.colSize  
 扫描矩阵原矩阵，根据某项列号，确定它转置后的行号,查cpot表,按查到的位置直接将该项存入转置矩阵数据表中。  
 ## 二叉树
 ### 遍历
