@@ -2,7 +2,7 @@
 #include<string.h> 
 using namespace std;
  
-#define MAX 10			//¶¥µã¸öÊıµÄ×î´óÖµ
+#define MAX 10			//é¡¶ç‚¹ä¸ªæ•°çš„æœ€å¤§å€¼
  
 struct ArcNode
 {
@@ -10,18 +10,18 @@ struct ArcNode
 	struct ArcNode *next;
 };
  
-int n, m;				//¶¥µã¸öÊı¡¢±ßÊı
-ArcNode *List[MAX];		//Ã¿¸ö¶¥µãµÄ±ßÁ´±í±íÍ·Ö¸Õë
-int count[MAX];			//¸÷¶¥µãµÄÈë¶È
-char output[100];		//Êä³öÄÚÈİ
+int n, m;			//é¡¶ç‚¹ä¸ªæ•°ã€è¾¹æ•°
+ArcNode *List[MAX];		//æ¯ä¸ªé¡¶ç‚¹çš„è¾¹é“¾è¡¨è¡¨å¤´æŒ‡é’ˆ
+int count[MAX];			//å„é¡¶ç‚¹çš„å…¥åº¦
+char output[100];		//è¾“å‡ºå†…å®¹
  
 void TopSort()
 {
 	int i, top = -1;
 	ArcNode *temp;
-	bool bcycle = false;	//ÊÇ·ñ´æÔÚÓĞÏò»·µÄ±êÖ¾
-	int pos = 0;			//Ğ´ÈëoutputÊı×éµÄÎ»ÖÃ
-	for(i = 0; i < n; i++)	//Èë¶ÈÎª0µÄ¶¥µãÈëÕ»
+	bool bcycle = false;	//æ˜¯å¦å­˜åœ¨æœ‰å‘ç¯çš„æ ‡å¿—
+	int pos = 0;		//å†™å…¥outputæ•°ç»„çš„ä½ç½®
+	for(i = 0; i < n; i++)	//å…¥åº¦ä¸º0çš„é¡¶ç‚¹å…¥æ ˆ
 	{
 		if(count[i] == 0) 
 		{
@@ -31,17 +31,17 @@ void TopSort()
 	}
 	for(i = 0; i < n; i++)
 	{
-		if(top == -1)		//Õ»Îª¿Õ£¬´æÔÚÓĞÏò»ØÂ·
+		if(top == -1)		//æ ˆä¸ºç©ºï¼Œå­˜åœ¨æœ‰å‘å›è·¯
 		{
 			bcycle = true;
 			break;
 		}
 		else
 		{
-			int j = top; top = count[top];		//Õ»¶¥¶¥µãj³öÕ»
+			int j = top; top = count[top];		//æ ˆé¡¶é¡¶ç‚¹jå‡ºæ ˆ
 			pos += sprintf(output+pos, "%d ", j+1);
 			temp = List[j];
-			//±éÀú¶¥µãjµÄ±ßÁ´±í£¬Ã¿Ìõ³ö±ßµÄÖÕµãµÄÈë¶È¼õ1
+			//éå†é¡¶ç‚¹jçš„è¾¹é“¾è¡¨ï¼Œæ¯æ¡å‡ºè¾¹çš„ç»ˆç‚¹çš„å…¥åº¦å‡1
 			while(temp != NULL)
 			{
 				int k = temp->to;
@@ -57,28 +57,28 @@ void TopSort()
 	if(bcycle) printf("Network has a cycle!\n");
 	else
 	{
-		output[pos-1] = '\n';	//È¥µô×îºóµÄ¿Õ¸ñ
+		output[pos-1] = '\n';	//å»æ‰æœ€åçš„ç©ºæ ¼
 		printf(output);
 	}
 }
 int main()
 {
-	int i, u, v;		//Ñ­»·±äÁ¿¡¢±ßµÄÆğµãºÍÖÕµã
+	int i, u, v;		//å¾ªç¯å˜é‡ã€è¾¹çš„èµ·ç‚¹å’Œç»ˆç‚¹
 	while(1)
 	{
-		scanf("%d%d", &n, &m);	//¶ÁÈë¶¥µã¸öÊı¡¢±ßÊı
+		scanf("%d%d", &n, &m);	//è¯»å…¥é¡¶ç‚¹ä¸ªæ•°ã€è¾¹æ•°
 		if(n == 0 && m == 0) break;
 		memset(List, 0, sizeof(List));
 		memset(count, 0, sizeof(count));
 		memset(output, 0, sizeof(output));
 		ArcNode *temp;
-		for(i = 0; i < m; i++)		//±ßÁ´±í
+		for(i = 0; i < m; i++)		//è¾¹é“¾è¡¨
 		{
 			scanf("%d%d", &u, &v);
 			u--; v--;
 			count[v]++;
 			temp = new ArcNode;
-			temp->to = v; temp->next = NULL;	//¹¹ÔìÁÚ½Ó±í
+			temp->to = v; temp->next = NULL;	//æ„é€ é‚»æ¥è¡¨
 			if(List[u] == NULL) List[u] = temp;
 			else
 			{
@@ -89,7 +89,7 @@ int main()
  
 		TopSort();
  
-		for(i = 0; i < n; i++)					//ÊÍ·Å±ßÁ´±íÉÏ¸÷±ß½áµãËùÕ¼ÓÃµÄ´æ´¢¿Õ¼ä
+		for(i = 0; i < n; i++)					//é‡Šæ”¾è¾¹é“¾è¡¨ä¸Šå„è¾¹ç»“ç‚¹æ‰€å ç”¨çš„å­˜å‚¨ç©ºé—´
 		{
 			temp = List[i];
 			while(temp != NULL)
