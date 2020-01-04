@@ -117,8 +117,37 @@ ASL同二分查找，时间复杂度为O(log2(n))
 - 右子树上所有关键字大于结点关键字
 - 如果对一棵二叉搜索树进行中序遍历，可以按从小到大的顺序，将各结点关键字排列起来，所以也称二叉搜索树为二叉排序树  
 
-__二叉搜索树的插入算法__：TODO  
-__二叉搜索树的删除算法__：TODO  
+__查询__:  
+```
+TREE-SEARCH(x, k)
+    if x == nil or k == x.key  //如不存在或者找到，直接返回
+        return x
+    if k < x.key                    //如果小于当前节点，根据性质，在左子树中搜索
+        return TREE-SEARCH(x.left, k)
+    else                          //如果大于等于当前节点，根据性质，在右子树中搜索
+        return TREE-SEARCH(x.right, k)
+```
+__插入__：  
+```
+TREE-INSERT(T, z)
+    y = nil
+    x = T.root
+    while x != nil //循环结束后，x一定为空，此时x即为节点z要插入的地方
+        y = x    //在这里给y赋值，保证循环结束后y始终是x的父节点
+        if z.key < x.key
+            x = x.left
+        else
+            x = x.right
+        z.p = y  //  y始终是x的父节点，为了插入z，需要让z的父节点指向x的父节点，即指向y
+        if y == nil  //  如果y为空，说明插入时是一棵空的树，需要将树根指向z
+            T.root = z
+        elseif z.key < y.key   //  判断节点z是y的左孩子还是右孩子
+            y.left = z
+        else
+            y.right = z
+```
+__删除__：  
+TODO
 
 
 
