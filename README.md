@@ -147,10 +147,40 @@ TREE-INSERT(T, z)
             y.right = z
 ```
 __删除__：  
-TODO
+为了实现删除过程的伪代码，我们需要定义一个子过程`TRANSPLANT`，它是用为了用以`v`为根的子树替换以`u`为根的子树，让`u`的双亲节点变为`v`的双亲节点，即让`v`称为`u`的双亲节点的孩子：  
+```
+TRANSPLANT(T, u, v)
+    if u.p == nil   // 当u位树的根节点时，直接将树的根节点指向v
+        T.root = v
+    elseif u == u.p.left   // 如果u是左孩子，则u的父节点的左孩子指向v
+        u.p.left = v
+    else    // 如果u是右孩子，则u的父节点的右孩子指向v
+        u.p.right = v
+    if v != nil   
+        v.p = u.p    // 将v的父节点设为u的父节点
 
-
-
+```
+然后实现具体的删除过程：  
+```
+TREE-DELETE(T, z)
+    if z.left == nil  // 如果左孩子为空，则直接用右孩子代替z即可，而不管右孩子是否为空（右孩子为空时对应情况一否则对应情况二）
+        TRANSPLANT(T, z, z.right)
+    elseif z.right == nil  // 右孩子为空，直接用做孩子代替z
+        TRANSPLANT(T, z, z.left)
+    else y = TREE-MINIMUM(z.right)  // 左右孩子均不为空，找到z的后继y，即z的右子树的最小值，对应第三种情况
+        if y.p != z   // 如果z的后继y不是z的右孩子，对应第三种情况的2
+            TRANSPLANT(T, y, y.right)  // 用y的右孩子代替y
+            y.right = z.right    // 将y的右孩子指向z的右孩子
+            y.right.p = y     // 将y的右孩子(原来的z的右孩子)的父节点设为y
+        TRANSPLANT(T, z, y)  // 用y代替z
+        y.left = z.left
+        y.left.p = p
+```        
+因此总的来说，删除操作可以分为两大类：  
+1. z的孩子总数小于2时，直接用z的孩子代替z即完成了对z的删除。
+2. z有两个孩子时：  
+2.1. z的后继y是z的右孩子：直接用y代替z即可（别忘了将z的左孩子的父节点设置为y）。  
+2.2. z的后继y不是z的右孩子：先用y的右孩子x代替y，再用y代替z。  
 
 
 
