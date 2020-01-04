@@ -165,7 +165,7 @@ TRANSPLANT(T, u, v)
 TREE-DELETE(T, z)
     if z.left == nil  // 如果左孩子为空，则直接用右孩子代替z即可，而不管右孩子是否为空（右孩子为空时对应情况一否则对应情况二）
         TRANSPLANT(T, z, z.right)
-    elseif z.right == nil  // 右孩子为空，直接用做孩子代替z
+    elseif z.right == nil  // 右孩子为空，直接用左孩子代替z
         TRANSPLANT(T, z, z.left)
     else y = TREE-MINIMUM(z.right)  // 左右孩子均不为空，找到z的后继y，即z的右子树的最小值，对应第三种情况
         if y.p != z   // 如果z的后继y不是z的右孩子，对应第三种情况的2
