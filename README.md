@@ -267,9 +267,81 @@ Hash函数的限制：
 3. 链地址法  
 
 ## 排序（sorting）
+### 插入排序
+```
+void insertionSort(int[] arr) 
+{ 
+    for (int i = 1; i < length; i++) 
+    { 
+        int j = i; 
+        while (j > 0 && arr[j] < arr[j - 1])     
+        { 
+            swap(arr,j,j-1); j--; 
+        }
+    }
+}
+```
+### 折半插入排序
+```
+void BInsertSort(SqList &L) {// 对顺序表L作折半插入排序。
+    int i,j,high,low,m;
+    for (i=2; i<=L.length; ++i) {
+        L.r[0] = L.r[i];       // 将L.r[i]暂存到L.r[0]
+        low = 1;   high = i-1;
+        while (low<=high) {    // 在r[low..high]中折半查找有序插入的位置
+            m = (low+high)/2;                            // 折半
+            if (LT(L.r[0].key, L.r[m].key)) high = m-1;  // 插入点在低半区
+            else  low = m+1;                             // 插入点在高半区
+        }
+        for (j=i-1; j>=high+1; --j) L.r[j+1] = L.r[j];  // 记录后移
+        L.r[high+1] = L.r[0];                           // 插入
+    }
+} // BInsertSort
+```
+### 二路插入排序
+### 希尔排序 
+```
+void ShellInsert(SqList &L, int dk) {
+// 对顺序表L作一趟希尔插入排序。
+    int i,j;
+    for (i=dk+1; i<=L.length; ++i) { // L.r[0]作为交换区
+        if (LT(L.r[i].key, L.r[i-dk].key)) {
+            L.r[0] = L.r[i]; 
+            for (j=i-dk; j>0 && LT(L.r[0].key, L.r[j].key); j-=dk){
+                L.r[j+dk] = L.r[j]; 
+            }
+      L.r[j+dk] = L.r[0]; // 插入
+    }
+} // ShellInsert
 
+void ShellSort(SqList &L, int dlta[], int t) {
+    // 按增量序列dlta[0..t-1]对顺序表L作希尔排序
+    for (int k=0; k<t; ++k) {
+        ShellInsert(L, dlta[k]);
+    }
+} // ShellSort
 
+```
+### 冒泡排序
+```
+void bubble_sort(int a[], int n)
+{
+    int i, j, temp;
+    for (j = 0; j < n - 1; j++)
+        for (i = 0; i < n - 1 - j; i++)
+        {
+            if(a[i] > a[i + 1])
+            {
+                temp = a[i];
+                a[i] = a[i + 1];
+                a[i + 1] = temp;
+            }
+        }
+}
 
+```
+### 快速排序
+TODO
 
 
 
