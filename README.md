@@ -342,7 +342,12 @@ void bubble_sort(int a[], int n)
 ```
 ### 快速排序
 TODO
-
+### 堆排序
+TODO
+### 归并排序
+TODO
+### 基数排序
+TODO
 
 
 
