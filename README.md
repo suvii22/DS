@@ -124,7 +124,31 @@ Ci ：查找第i个记录需要进行比较的次数。
 算法分析  
 1. 查找时每经过一次比较，查找范围就缩小一半，该过程可用一棵二叉树表示，这样所得到的二叉树称为判定树(Decision Tree)。
 2. 将二叉判定树的第[log2n] +1层上的结点补齐就成为一棵满二叉树，深度不变，h=[log2(n+1)]
-3. 由满二叉树性质知，第i 层上的结点数为2i-1(i≤h) ，设表中每个记录的查找概率相等，即Pi=1/n，查找成功时的平均查找长度ASL：ASL=[(n+1)/n]log2(n+1)-1  
+3. 由满二叉树性质知，第i 层上的结点数为2i-1(i≤h) ，设表中每个记录的查找概率相等，即Pi=1/n，查找成功时的平均查找长度ASL：ASL=[(n+1)/n]log2(n+1)-1 
+```
+int BinarySearch(int array[], int n, int value)
+{
+    int left = 0;
+    int right = n - 1;
+    //如果这里是int right = n 的话，那么下面有两处地方需要修改，以保证一一对应：
+    //1、下面循环的条件则是while(left < right)
+    //2、循环内当 array[middle] > value 的时候，right = mid
+
+    while (left <= right)  //循环条件，适时而变
+    {
+        int middle = left + ((right - left) >> 1);  //防止溢出，移位也更高效。同时，每次循环都需要更新。
+        if (array[middle] > value)
+            right = middle - 1;  //right赋值，适时而变
+        else if (array[middle] < value)
+            left = middle + 1;
+        else
+            return middle;
+        //可能会有读者认为刚开始时就要判断相等，但毕竟数组中不相等的情况更多
+        //如果每次循环都判断一下是否相等，将耗费时间
+    }
+    return -1;
+}
+```
 ### 分块查找
 分块查找(Blocking Search)又称索引顺序查找，是前面两种查找方法的综合。
 1. 将查找表分成几块。块间有序，即第i+1块的所有记录关键字均大于(或小于)第i块记录关键字；块内无序。
