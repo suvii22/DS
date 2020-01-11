@@ -18,6 +18,25 @@ TODO
 ## 队列
 TODO 
 ## 串
+正常求子串：
+```
+char *strstr(const char* str , const char *substr)
+{
+    assert(substr != NULL && str != NULL); 
+    const char * psub = substr; 
+    const char * pstr = str; 
+    while (*pstr) { 
+        const char * tmp = pstr; 
+        while (*tmp++ == *psub++); 
+        if (*psub == '\0') { 
+            return pstr; }
+        psub = substr; 
+        pstr++; 
+    } 
+    return NULL;
+}
+
+```
 ### KMP
 对于模式串P的前j+1个序列字符：
 - 若P[k] == P[j]，则next[j + 1] = next [j] + 1 = k + 1  
